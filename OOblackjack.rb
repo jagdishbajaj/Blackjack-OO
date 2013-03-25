@@ -71,7 +71,7 @@ module Hand 					# contains all the common code to both Player and Dealer object
 
 	def total 					# adds up the total of all the cards
 		face_values = cards.map{|card| card.face_value}			# the .map function will give us just the face value, we don't need the suit
-		puts "Face values are #{face_values}"
+		#puts "Face values are #{face_values}"
 		total = 0				# our local variable for total
 
 		face_values.each do |fv|
@@ -80,7 +80,6 @@ module Hand 					# contains all the common code to both Player and Dealer object
 			else
 				total += (fv.to_i == 0 ? 10 : fv.to_i)			# if the integer value is zero, add 10 because we have a J, Q, K -- else add the integer value
 			end
-			puts "Our running total is #{total}"
 		end
 
 		# Now lets correct for Aces. There could be multiple aces so we are going to iterate through face_values and find them
@@ -90,7 +89,7 @@ module Hand 					# contains all the common code to both Player and Dealer object
 			break if total <=21			# if the total is below 21, leave the loop
 			total -= 10					# if not, reduce the total by 10 so that we treat each Ace as a 1, not 11
 		end
-		puts "---#{name}'s total is #{total}"
+		total
 	end
 
 	def add_card (new_card)			# adds a new card to the Hand
@@ -101,7 +100,7 @@ module Hand 					# contains all the common code to both Player and Dealer object
 	def is_busted?
 		total > Blackjack::BLACKJACK_BUST
 	end
-	binding.pry
+	#binding.pry
 end
 
 class Player
@@ -119,7 +118,7 @@ class Player
 		show_hand
 	end
 	puts "DEALER OBJECT CREATED"
-	binding.pry
+	#binding.pry
 end
 
 class Dealer
@@ -188,9 +187,9 @@ class Blackjack
 	def player_turn
 		puts "#{player.name}'s turn now..."
 		puts '=============pry==============='
-		binding.pry
+		#binding.pry
 		blackjack_or_bust?(player)
-		puts player.is.busted?
+
 		while !player.is_busted?
 			puts "Do you want to Hit or Stay, please enter 1) Hit or 2) Stay"
 			hit_or_stay = gets.chomp
@@ -246,7 +245,7 @@ class Blackjack
 			puts "OK, here we go again, new game starting ..."
 			puts " "
 			deck = Deck.new
-			player.Cards = [ ]
+			player.cards = [ ]
 			dealer.cards = [ ]
 			startgame
 		else
